@@ -1,5 +1,8 @@
 podman-compose exec web python manage.py makemigrations
-podman-compose exec web python manage.py migrade
+podman-compose exec web python manage.py migrate
 podman-compose exec web pip list --not-required
 
 podman-compose up --build
+
+podman-compose restart web
+podman-compose down
