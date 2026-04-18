@@ -7,7 +7,8 @@ User = get_user_model()
 @admin.register(User)
 class CustomUserAdmin(UserAdmin):
     """
-    Custom Admin interface for our User model.
+    Customized Admin interface for the User model to support email-based auth.
+    Handles custom fieldsets for creation and editing.
     """
     list_display = ('email', 'username', 'is_staff', 'is_active', 'date_joined')
     search_fields = ('email', 'username')

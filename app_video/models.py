@@ -25,4 +25,5 @@ class Video(models.Model):
     processing_status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='PENDING')
 
     def __str__(self):
+        """Returns the title of the video as its string representation."""
         return self.title

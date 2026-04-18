@@ -1,4 +1,3 @@
-import os
 from django.contrib.auth import get_user_model, authenticate
 from django.conf import settings
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode

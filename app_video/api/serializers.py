@@ -7,10 +7,12 @@ class VideoSerializer(serializers.ModelSerializer):
     thumbnail_url = serializers.SerializerMethodField()
 
     class Meta:
+        """Metadata for the VideoSerializer, specifying model and field mapping."""
         model = Video
         fields = ['id', 'created_at', 'title', 'description', 'thumbnail_url', 'category']
 
     def get_thumbnail_url(self, obj):
+        """Returns the absolute URL for the video thumbnail if it exists."""
         if obj.thumbnail:
             return f"{settings.BACKEND_URL}{obj.thumbnail.url}"
         return None
