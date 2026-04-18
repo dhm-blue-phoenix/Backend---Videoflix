@@ -57,7 +57,7 @@ def _handle_conversion_result(video, result, video_id, res):
 
 def _set_video_error(video, error_msg):
     """Helper to set video status to ERROR and log the message."""
-    print(error_msg)
+    # print(error_msg)
     video.processing_status = 'ERROR'
     video.save()
 

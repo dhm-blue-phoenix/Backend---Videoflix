@@ -30,12 +30,9 @@ SECRET_KEY = os.getenv('SECRET_KEY', default='django-insecure-@#x5h3zj!g+8g1v@2^
 DEBUG = True
 
 ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", default="localhost").split(",")
-print("ALLOWED_HOSTS", ALLOWED_HOSTS)
 CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS", default="http://localhost:4200").split(",")
-print("CSRF_TRUSTED_ORIGINS", CSRF_TRUSTED_ORIGINS)
 
 CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", default="http://localhost:5500,http://127.0.0.1:5500").split(",")
-print("CORS_ALLOWED_ORIGINS", CORS_ALLOWED_ORIGINS)
 CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
@@ -191,9 +188,7 @@ DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', default='noreply@video
 
 # Frontend URL for links in emails
 FRONTEND_URL = os.environ.get('FRONTEND_URL', default='http://localhost:5500')
-print("FRONTEND_URL", FRONTEND_URL)
 BACKEND_URL = os.environ.get("BACKEND_URL", default="http://localhost:8000")
-print("BACKEND_URL", BACKEND_URL)
 
 # Upload limits (500MB)
 DATA_UPLOAD_MAX_MEMORY_SIZE = 524288000
