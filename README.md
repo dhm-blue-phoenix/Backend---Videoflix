@@ -114,6 +114,16 @@ After registering and activating the account, the `/api/login/` endpoint will se
 
 Heavy tasks such as HLS video conversion (480p, 720p, 1080p) and thumbnail extraction are handled asynchronously. When a new video is uploaded, the system utilizes **Redis** and **Django RQ** to spawn background worker processes. This keeps the API responsive even during intensive FFmpeg operations.
 
+## Custom Docker Modifications
+
+Compared to the standard `docker-compose` and Dockerfile templates provided by the Developer Akademie, the following project-specific enhancements were made:
+
+- **`backend.Dockerfile`**: Added `jpeg-dev` and `zlib-dev` to the `.build-deps` layer to support image processing (required for Pillow and thumbnail generation).
+- **`docker-compose.yml`**: 
+  - Added the `:Z` flag to all volume mounts (`:Z`) to ensure strict SELinux compatibility when running with Podman on Linux.
+  - Integrated a `mailhog` service to capture and test outbound emails (like activation and password resets) locally.
+- **`backend.entrypoint.sh`**: Appended `--timeout 300` to the `gunicorn` command to prevent worker timeouts during extensive I/O or background processing handoffs.
+
 ## Technologies Used
 
 - **Django 5.x** - Web framework
