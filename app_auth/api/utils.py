@@ -74,20 +74,22 @@ def delete_auth_cookies(response):
 def blacklist_refresh_token(request):
     """Blacklists the refresh token from the cookie."""
     refresh_token = request.COOKIES.get('refresh_token')
-    if refresh_token:
-        try:
-            RefreshToken(refresh_token).blacklist()
-        except: pass
+    if not refresh_token:
+        raise ValidationError({"detail": "Refresh token missing."})
+    try:
+        RefreshToken(refresh_token).blacklist()
+    except: pass
 
 def refresh_access_token(request):
     """Generates a new access token from the refresh token cookie."""
     refresh_token = request.COOKIES.get('refresh_token')
     if not refresh_token:
-        raise AuthenticationFailed({"detail": "Refresh token missing."})
+        raise ValidationError({"detail": "Refresh token missing."})
     try:
         return str(RefreshToken(refresh_token).access_token)
     except:
         raise AuthenticationFailed({"detail": "Invalid refresh token."})
+
 
 def initiate_password_reset(email):
     """Enqueues reset email if user exists. Always returns success."""

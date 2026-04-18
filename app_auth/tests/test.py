@@ -91,6 +91,8 @@ class AuthAPITests(TestCase):
     def test_logout_clears_cookies(self):
         """Happy Path: Logout clears authentication cookies."""
         user = User.objects.create_user(email="logout@example.com", password="Password123!", is_active=True)
+        login_res = self.client.post(self.login_url, {"email": "logout@example.com", "password": "Password123!"})
+        self.client.cookies['refresh_token'] = login_res.cookies['refresh_token'].value
         self.client.force_authenticate(user=user)
         response = self.client.post(reverse('logout'))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
