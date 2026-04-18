@@ -10,7 +10,7 @@ from .utils import get_hls_file_path
 @permission_classes([IsAuthenticated])
 def video_list_view(request):
     """Returns a list of all videos sorted by creation date."""
-    videos = Video.objects.all().order_by('-created_at')
+    videos = Video.objects.filter(processing_status='DONE').order_by('-created_at')
     serializer = VideoSerializer(videos, many=True)
     return Response(serializer.data)
 

@@ -28,7 +28,7 @@ class ContentAPITests(TestCase):
 
     def test_video_list_authenticated(self):
         """Happy Path: Authenticated user can list videos."""
-        Video.objects.create(title="V1", category="ACTION")
+        Video.objects.create(title="V1", category="ACTION", processing_status="DONE")
         response = self.client.get(self.video_list_url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('thumbnail_url', response.data[0])
