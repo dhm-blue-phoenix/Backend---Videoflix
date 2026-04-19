@@ -6,6 +6,7 @@ from django.utils.http import urlsafe_base64_decode
 from django.utils.encoding import force_str
 from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import default_token_generator
+from django.middleware.csrf import get_token
 from .utils import (
     create_user, authenticate_and_get_tokens, set_auth_cookies,
     delete_auth_cookies, blacklist_refresh_token, refresh_access_token, guest_login,
@@ -32,6 +33,7 @@ def login_view(request):
     """Authenticates user via email and returns JWT cookies."""
     data = authenticate_and_get_tokens(request.data.get('email'), request.data.get('password'))
     res = Response({"detail": "Login successful", "user": data['user']}, status=status.HTTP_200_OK)
+    get_token(request)
     return set_auth_cookies(res, data['access'], data['refresh'])
 
 @api_view(['POST'])
@@ -40,10 +42,11 @@ def guest_login_view(request):
     """Logs in a guest user for instant access."""
     data = guest_login()
     res = Response({"detail": "Guest login successful", "user": data['user']}, status=status.HTTP_200_OK)
+    get_token(request)
     return set_auth_cookies(res, data['access'], data['refresh'])
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def logout_view(request):
     """Logs out user by blacklisting tokens and clearing cookies."""
     blacklist_refresh_token(request)

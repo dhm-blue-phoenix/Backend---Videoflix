@@ -22,7 +22,7 @@ def send_password_reset_email_task(user_id):
     user = User.objects.get(id=user_id)
     uid = urlsafe_base64_encode(force_bytes(user.pk))
     token = default_token_generator.make_token(user)
-    url = f"{settings.FRONTEND_URL}/pages/auth/password_reset.html?uid={uid}&token={token}"
+    url = f"{settings.FRONTEND_URL}/pages/auth/confirm_password.html?uid={uid}&token={token}"
     subject = "Passwort zurücksetzen - Videoflix"
     message = f"Hallo, setze dein Passwort hier zurück: {url}"
     return send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, [user.email])
