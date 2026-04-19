@@ -23,9 +23,16 @@ docker --version
 
 2. Create a `.env` file in the root directory based on `.env.template`:
 
-   ```bash
-   cp .env.template .env
-   ```
+    ```bash
+    # Linux / macOS / Git Bash
+    cp .env.template .env
+
+    # Windows (CMD)
+    copy .env.template .env
+
+    # Windows (PowerShell)
+    Copy-Item .env.template .env
+    ```
    *Update the `.env` file with your specific environment configurations (e.g., `SECRET_KEY`, `FRONTEND_URL`, `BACKEND_URL`).*
 
    > **Note:** Never commit your `.env` file to version control. It is listed in `.gitignore` by default.
