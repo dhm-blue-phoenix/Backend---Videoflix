@@ -17,7 +17,7 @@ docker --version
 1. Clone the repository and navigate to the folder:
 
    ```bash
-   git clone https://github.com/your-username/Backend---Videoflix.git
+   git clone https://github.com/dhm-blue-phoenix/Backend---Videoflix.git
    cd Backend---Videoflix
    ```
 
@@ -123,6 +123,7 @@ Compared to the standard `docker-compose` and Dockerfile templates provided by t
   - Added the `:Z` flag to all volume mounts (`:Z`) to ensure strict SELinux compatibility when running with Podman on Linux.
   - Integrated a `mailhog` service to capture and test outbound emails (like activation and password resets) locally.
 - **`backend.entrypoint.sh`**: Appended `--timeout 300` to the `gunicorn` command to prevent worker timeouts during extensive I/O or background processing handoffs.
+- **`.env.template`**: Added `FRONTEND_URL`, `BACKEND_URL`, and `CORS_ALLOWED_ORIGINS` to provide explicit control over CORS and allowed origins, ensuring seamless frontend-backend integration.
 
 ## Technologies Used
 
