@@ -6,7 +6,7 @@ from django.contrib.auth.tokens import default_token_generator
 from django_rq import enqueue
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.exceptions import AuthenticationFailed, ValidationError
-from ..tasks import send_activation_email_task, send_password_reset_email_task
+from ..tasks import send_email_activation_task, send_email_password_reset_task
 
 User = get_user_model()
 
@@ -14,7 +14,7 @@ def create_user(data):
     """Validates data and creates a new inactive user."""
     _validate_registration_data(data)
     user = User.objects.create_user(email=data.get('email'), password=data.get('password'))
-    enqueue(send_activation_email_task, user.id)
+    enqueue(send_email_activation_task, user.id)
     return {
         "user": {"id": user.id, "email": user.email},
         "token": "activation_token"
@@ -95,7 +95,7 @@ def initiate_password_reset(email):
     """Enqueues reset email if user exists. Always returns success."""
     try:
         user = User.objects.get(email=email)
-        enqueue(send_password_reset_email_task, user.id)
+        enqueue(send_email_password_reset_task, user.id)
     except User.DoesNotExist:
         pass
     return {"detail": "An email has been sent to reset your password."}
