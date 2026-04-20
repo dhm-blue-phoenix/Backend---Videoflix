@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        body {
+            font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #333;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .logo {
+            width: 351px;
+            height: 50px;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .span-color {
+            color: #2233cf;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 12px 35px;
+            /*background: linear-gradient(to right, #8903FF, #3547FF);*/
+            background-color: #0d1edc;
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            border: none;
+        }
+
+        .footer {
+            margin-top: 30px;
+        }
+
+        br {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <center><img src="{{ backend_url }}/static/Logo.svg" alt="VIDEOFLIX" class="logo"></center>
+        <p>Dear <span class="span-color">{{ name }}</span>,</p>
+        <p>Thank you for registering with <span class="span-color">Videoflix</span>. To complete your registration
+            and verify your email address, please
+            click the link below:</p>
+        <a href="{{ url }}" class="button">Activate account</a>
+        <p>If you did not create an account with us, please disregard this email.</p>
+        <div class="footer">
+            <p>Best regards,<br>Your Videoflix Team.</p>
+        </div>
+    </div>
+</body>
+
+</html>
