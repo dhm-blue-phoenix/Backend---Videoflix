@@ -29,10 +29,10 @@ SECRET_KEY = os.getenv('SECRET_KEY', default='django-insecure-@#x5h3zj!g+8g1v@2^
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", default="localhost").split(",")
-CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS", default="http://localhost:4200").split(",")
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", default="127.0.0.1").split(",")
+CSRF_TRUSTED_ORIGINS = os.environ.get("CSRF_TRUSTED_ORIGINS", default="http://127.0.0.1:4200").split(",")
 
-CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", default="http://localhost:5500,http://127.0.0.1:5500").split(",")
+CORS_ALLOWED_ORIGINS = os.environ.get("CORS_ALLOWED_ORIGINS", default="http://127.0.0.1:5500").split(",")
 CORS_ALLOW_CREDENTIALS = True
 
 # Application definition
@@ -191,8 +191,8 @@ EMAIL_USE_SSL = os.environ.get('EMAIL_USE_SSL', default='False') == 'True'
 DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', default='noreply@videoflix.com')
 
 # Frontend URL for links in emails
-FRONTEND_URL = os.environ.get('FRONTEND_URL', default='http://localhost:5500')
-BACKEND_URL = os.environ.get("BACKEND_URL", default="http://localhost:8000")
+FRONTEND_URL = os.environ.get('FRONTEND_URL', default='http://127.0.0.1:5500')
+BACKEND_URL = os.environ.get("BACKEND_URL", default="http://127.0.0.1:8000")
 
 # Upload limits (500MB)
 DATA_UPLOAD_MAX_MEMORY_SIZE = 524288000
